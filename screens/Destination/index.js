@@ -19,7 +19,7 @@ import Signin from "../Signin";
 
 const Stack = createStackNavigator();
 
-const Dashboard = () => {
+const Destination = () => {
   const dispatch = useDispatch();
 
   const [location, setLocation] = useState(null);
@@ -56,7 +56,7 @@ const Dashboard = () => {
         </View>
         <View style={tw`absolute bottom-5 w-full justify-center`}>
           <GooglePlacesAutocomplete
-            placeholder="Choose Pickup Location"
+            placeholder="Choose Destination"
             onPress={(data, details = null) => {
               // 'details' is provided when fetchDetails = true
               console.log(data, details);
@@ -93,6 +93,6 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Destination;
 
 const styles = StyleSheet.create({});

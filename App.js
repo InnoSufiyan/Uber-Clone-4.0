@@ -11,6 +11,7 @@ import Splash from "./screens/Splash";
 import Signin from "./screens/Signin";
 import Signup from "./screens/Signup";
 import Dashboard from "./screens/Dashboard";
+import Destination from "./screens/Destination";
 
 const Stack = createStackNavigator();
 
@@ -43,6 +44,13 @@ export default function App() {
           <Stack.Screen
             name="dashboard"
             component={Dashboard}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="destination"
+            component={Destination}
             options={{
               headerShown: false,
             }}

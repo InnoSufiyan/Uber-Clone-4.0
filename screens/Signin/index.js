@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createUser, signInUser } from "../../config/firebase";
 
 import {
   Image,
@@ -20,6 +21,15 @@ import Button from "../../components/Button";
 
 const Signin = () => {
   const navigation = useNavigation();
+
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  async function loginHandler() {
+    console.log(email, password);
+    await signInUser(email, password);
+    navigation.navigate('dashboard')
+  }
 
   return (
     <KeyboardAvoidingView
@@ -43,11 +53,13 @@ const Signin = () => {
             style={[styles.input, tw`border-b text-lg mt-5`]}
             placeholderTextColor="white"
             placeholder="Enter Email"
+            onChangeText={setemail}
           />
           <TextInput
             style={[styles.input, tw`border-b text-lg mt-5`]}
             placeholderTextColor="white"
             placeholder="Password"
+            onChangeText={setpassword}
           />
           <TouchableOpacity
             style={tw`mt-5`}
@@ -56,9 +68,9 @@ const Signin = () => {
             <Text style={tw`text-white`}>Don't have an Account ??</Text>
           </TouchableOpacity>
         </View>
-        <View style={tw`absolute bottom-5 w-full justify-center`}>
-          <Button textName="Get a Uber Taxi" toNavigate="dashboard" />
-        </View>
+        <TouchableOpacity onPress={loginHandler}>
+          <Text style={tw`text-white text-center text-lg`}>Sign in</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );

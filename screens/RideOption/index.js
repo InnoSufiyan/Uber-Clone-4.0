@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import Map from "../../components/Map";
 import { useDispatch } from "react-redux";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+
+import car1 from '../../assets/1.png'
+import car2 from '../../assets/2.png'
+import car3 from '../../assets/3.png'
 
 import { GOOGLE_MAPS_APIKEY } from "@env";
 
@@ -33,7 +37,11 @@ const RideOption = () => {
           <Map />
         </View>
         <View style={tw`absolute bottom-5 w-full justify-center`}>
-          
+          <View style={{display: "flex", flexDirection: "row"}}>
+            <Image source={car1} />
+            <Image source={car1} />
+            <Image source={car1} />
+          </View>
               
           <Button textName="Select Car" toNavigate="rideoption" />
         </View>

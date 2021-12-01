@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import {createUser} from '../../config/firebase'
+import { createUser, signInUser } from "../../config/firebase";
 
 import {
   Image,
@@ -28,12 +28,12 @@ const Signup = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
-  function signupHandler() {
-    console.log("clicked");
+  async function signupHandler() {
+    console.log("clicked signup");
     console.log(name, fatherName, mobileNumber, email, password);
-    createUser(email, password)
+    await createUser(name, fatherName, mobileNumber, email, password)
+    navigation.navigate('signin')
   }
-
 
   return (
     <KeyboardAvoidingView

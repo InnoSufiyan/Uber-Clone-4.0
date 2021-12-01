@@ -12,6 +12,7 @@ import Signin from "./screens/Signin";
 import Signup from "./screens/Signup";
 import Dashboard from "./screens/Dashboard";
 import Destination from "./screens/Destination";
+import RideOption from "./screens/RideOption";
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,13 @@ export default function App() {
           <Stack.Screen
             name="destination"
             component={Destination}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="rideoption"
+            component={RideOption}
             options={{
               headerShown: false,
             }}

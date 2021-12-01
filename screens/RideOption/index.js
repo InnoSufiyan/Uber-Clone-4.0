@@ -16,7 +16,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const Destination = () => {
+const RideOption = () => {
   const dispatch = useDispatch();
 
   const [location, setLocation] = useState(null);
@@ -33,35 +33,7 @@ const Destination = () => {
           <Map />
         </View>
         <View style={tw`absolute bottom-5 w-full justify-center`}>
-          <GooglePlacesAutocomplete
-            placeholder="Choose Destination"
-            onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              console.log(data, details);
-            }}
-            query={{
-              key: GOOGLE_MAPS_APIKEY,
-              language: "en",
-            }}
-            onPress={(data, details = null) => {
-              dispatch(
-                setDestination({
-                  location: {
-                    latitude: details.geometry.location.lat,
-                    longitude: details.geometry.location.lng,
-                  },
-                  description: data.description,
-                })
-              );
-            }}
-            fetchDetails={true}
-            returnKeyType={"search"}
-            enablePoweredByContainer={false}
-            minLength={2}
-            listViewDisplayed={true}
-            nearbyPlacesAPI="GooglePlacesSearch"
-            debounce={400}
-          />
+          
               
           <Button textName="Select Car" toNavigate="rideoption" />
         </View>
@@ -70,6 +42,6 @@ const Destination = () => {
   );
 };
 
-export default Destination;
+export default RideOption;
 
 const styles = StyleSheet.create({});

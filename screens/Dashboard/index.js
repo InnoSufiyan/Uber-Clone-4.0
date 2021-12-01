@@ -8,8 +8,6 @@ import { GOOGLE_MAPS_APIKEY } from "@env";
 
 import { setDestination, setPickup } from "../slices/navSlice";
 import Button from "../../components/Button";
-import NavigateCard from "../../components/NavigateCard";
-import RideOptionCard from "../../components/RideOptionCard";
 
 import * as Location from "expo-location";
 
@@ -44,7 +42,7 @@ const Dashboard = () => {
           },
         })
       );
-      dispatch(setDestination(null));
+      // dispatch(setDestination(null));
     })();
   }, []);
 
@@ -86,7 +84,7 @@ const Dashboard = () => {
             debounce={400}
           />
               
-          <Button textName="Confirm Ride" toNavigate="destination" />
+          <Button textName="Choose Destination" toNavigate="destination" />
         </View>
       </View>
     </>

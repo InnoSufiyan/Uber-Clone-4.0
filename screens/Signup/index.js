@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import {createUser} from '../../config/firebase'
 
 import {
   Image,
@@ -21,6 +22,19 @@ import Button from "../../components/Button";
 const Signup = () => {
   const navigation = useNavigation();
 
+  const [name, setName] = useState("");
+  const [fatherName, setfatherName] = useState("");
+  const [mobileNumber, setmobileNumber] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  function signupHandler() {
+    console.log("clicked");
+    console.log(name, fatherName, mobileNumber, email, password);
+    createUser(email, password)
+  }
+
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -40,26 +54,31 @@ const Signup = () => {
         </View>
         <View style={tw`mx-10 mt-10`}>
           <TextInput
+            onChangeText={setName}
             style={[styles.input, tw`border-b text-lg mt-5`]}
             placeholderTextColor="white"
             placeholder="Full Name"
           />
           <TextInput
+            onChangeText={setfatherName}
             style={[styles.input, tw`border-b text-lg mt-5`]}
             placeholderTextColor="white"
             placeholder="Father's Name"
           />
           <TextInput
+            onChangeText={setmobileNumber}
             style={[styles.input, tw`border-b text-lg mt-5`]}
             placeholderTextColor="white"
             placeholder="Mobile Number"
           />
           <TextInput
+            onChangeText={setemail}
             style={[styles.input, tw`border-b text-lg mt-5`]}
             placeholderTextColor="white"
             placeholder="Email"
           />
           <TextInput
+            onChangeText={setpassword}
             style={[styles.input, tw`border-b text-lg mt-5`]}
             placeholderTextColor="white"
             placeholder="Password"
@@ -71,8 +90,15 @@ const Signup = () => {
             <Text style={tw`text-white`}>Already have an Account ??</Text>
           </TouchableOpacity>
         </View>
-        <View style={tw`fixed top-25 w-full justify-center`}>
-          <Button textName="Sign Up" toNavigate="signup" />
+        <View
+          style={[
+            tw`fixed top-20 w-full justify-center rounded-2xl py-4`,
+            { backgroundColor: "#4C4AC1" },
+          ]}
+        >
+          <TouchableOpacity onPress={signupHandler}>
+            <Text style={tw`text-white text-center text-lg`}>Signup</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
-import { selectDestination, selectPickup } from "../../screens/slices/navSlice";
+import { selectDestination, selectPickup, selecttravelTimeInformation } from "../../screens/slices/navSlice";
 
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from 'react-native-maps-directions';
@@ -13,6 +13,8 @@ import tw from "twrnc";
 const Map = () => {
   const pickup = useSelector(selectPickup);
   const destination = useSelector(selectDestination);
+
+  const travelTimeInformation = useSelector(selecttravelTimeInformation)
 
   const mapRef = useRef(null);
   console.log("pickupfromSelector--->", pickup);
@@ -30,6 +32,27 @@ const Map = () => {
       edgePadding: { top: 200, right: 200, bottom: 200, left: 200 },
     });
   }, [pickup, destination]);
+
+  useEffect(() => {
+    console.log("ponka");
+    if (!pickup || !destination) return;
+
+    console.log("second useEffect");
+
+    const getTravelTime = () => {
+      console.log("third useEffect");
+      fetch(
+        `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${pickup.description}&destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(settravelTimeInformation(data.rows[0].elements[0]));
+          console.log("data------>", data);
+          console.log("ponka3------>");
+        });
+    };
+    getTravelTime();
+  }, [pickup, destination, GOOGLE_MAPS_APIKEY]);
 
   return (
     <MapView
